@@ -3,9 +3,9 @@ services:
   web: 
     build: web
     container_name: web
-#    volumes: 
-#      - cdn-static-volume: /user/share/nginx/html:ro
+    volumes: 
+      - cdn-static-volume:/user/share/nginx/html:ro
     ports: 
       - 5678:80
-#volumes: 
-#  cdn-static-volume:
+volumes: 
+  cdn-static-volume:
