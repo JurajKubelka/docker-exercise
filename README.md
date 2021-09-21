@@ -35,16 +35,16 @@ docker run --rm -v nginx-test-volume:/opt/data -v "$(pwd):/opt/backup:ro" ubuntu
 
 ## nginx Dockerfile
 
-The [](docker) directory show how to build and run the nginx service with a named volume that contains particular files from [](server-files).
+The [docker](docker) directory show how to build and run the nginx service with a named volume that contains particular files from [server-files](server-files).
 
 In includes two shell scripts:
-- [](docker/build-services.sh): to build a new docker image
-- [](docker/run-services.sh): to create and run new docker container, which also includes a backup commands
+- [docker/build-services.sh](docker/build-services.sh): to build a new docker image
+- [docker/run-services.sh](docker/run-services.sh): to create and run new docker container, which also includes a backup commands
 
-Notice, that we cannot access [](server-files) from the [](docker/web) directory. For that reason we copy the directory [](server-files) into the [](docker/web). When a new image is built, we remove the copied files. I did not find better solution, as the `docker -f docker/web/Dockerfile` from the top directory generates other issues that are reported in several occasions on StackOverflow and yet no satisfactory solution provided. If you have better working solution, please, let me know.
+Notice, that we cannot access [server-files](server-files) from the [docker/web](docker/web) directory. For that reason we copy the directory [server-files](server-files) into the [docker/web](docker/web). When a new image is built, we remove the copied files. I did not find better solution, as the `docker -f docker/web/Dockerfile` from the top directory generates other issues that are reported in several occasions on StackOverflow and yet no satisfactory solution provided. If you have better working solution, please, let me know.
 
 ## Updating Named Volume Content
 
-When [](server-files) are updated, the named volume keeps the same old files. To update the existing volume content, we need to create a new container, similar to the backup one, that updates the volume content.
+When [server-files](server-files) are updated, the named volume keeps the same old files. To update the existing volume content, we need to create a new container, similar to the backup one, that updates the volume content.
 
-We can update the content using a temporal container. The [](docker/update-assets.sh) script exemplify such situation, updating `assets` directory.
+We can update the content using a temporal container. The [docker/update-assets.sh](docker/update-assets.sh) script exemplify such situation, updating `assets` directory.
