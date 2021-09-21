@@ -48,3 +48,7 @@ Notice, that we cannot access [server-files](server-files) from the [docker/web]
 When [server-files](server-files) are updated, the named volume keeps the same old files. To update the existing volume content, we need to create a new container, similar to the backup one, that updates the volume content.
 
 We can update the content using a temporal container. The [docker/update-assets.sh](docker/update-assets.sh) script exemplify such situation, updating `assets` directory.
+
+## docker-compose.yml 
+
+[docker-compose/docker-compose.yml](docker-compose/docker-compose.yml) shows how to define a service that uses the docker image created by [docker/build-services.sh](docker/build-services.sh) and use the existing volume created by [docker/run-services.sh](docker/run-services.sh).
