@@ -18,3 +18,5 @@ docker build -t "${IMAGE_NAME}" .
 
 ## clean subdirectory server-files
 rm -r "${SERVER_FILES}" 
+
+cd ..
