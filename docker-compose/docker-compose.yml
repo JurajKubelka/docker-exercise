@@ -9,5 +9,5 @@ services:
       - 5679:80
 volumes:
   example-docker-volume:
-    external:
-      name: example-docker-volume
+    external: true
+    name: example-docker-volume

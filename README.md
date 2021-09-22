@@ -61,11 +61,20 @@ An example of `copy-to-docker-volume` bash function: [copy-to-docker-volume](htt
 
 Another example creates a `busybox` container to use `docker cp`: [docker cp](https://stackoverflow.com/a/55683656). The problem with `docker cp` command is that it does not remove old files that do not exist anymore in a source file.
 
-## docker-compose.yml 
+## docker-compose
 
 [docker-compose/docker-compose.yml](docker-compose/docker-compose.yml) shows how to define a service that uses the docker image created by [docker/build-services.sh](docker/build-services.sh) and use the existing volume created by [docker/run-services.sh](docker/run-services.sh).
+
+## docker-compose-independent
+
+[docker-compose-independent/docker-compose.yml](docker-compose-independent/docker-compose.yml) shows how to define a service that creates necessary volumes, images, and containers. The `data` service is not necessary and can be replaced by a script execution similar to [docker-compose-independent/update-asserts.sh](docker-compose-independent/update-asserts.sh) that initialize (or update) the volume content. 
+
+The `web` service cannot write to the volume. If we allow it, the volume initialization can happen using the `web` service.
 
 ## Other Tips 
 
 Open shell in docker ubuntu: `docker run -it --rm ubuntu`. With a mounted named volume: `docker run -it --rm -v example-docker-volume:/opt/data ubuntu`.
 
+## Documentation
+
+- [compose file v.3](https://docs.docker.com/compose/compose-file/compose-file-v3/)

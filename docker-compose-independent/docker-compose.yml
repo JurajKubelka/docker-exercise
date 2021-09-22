@@ -1,0 +1,25 @@
+version: "3.9"
+services:
+  data:
+    build: ./data
+    container_name: data
+    labels:
+      com.jurajkubelka.description: "Initialize data. I am used because the web service does not have write access."
+    volumes:
+      - example-data:/opt/data
+  web:
+    build: ./web
+    container_name: web
+    labels:
+      com.jurajkubelka.description: "The nginx servise providing access to data files."
+    volumes:
+      - example-data:/usr/share/nginx/html:ro
+    ports:
+      - 5679:80
+    depends_on:
+      - data
+volumes:
+  example-data:
+    name: ${CDN_VOLUME_NAME:-excercise-independent-data}
+    labels:
+      com.jurajkubelka.description: "Data served by the web service and initialized by the data service."
