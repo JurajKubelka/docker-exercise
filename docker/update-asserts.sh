@@ -4,9 +4,10 @@
 source .env
 
 # Update assets using temporary container
-docker run \
-    --rm \
-    -v "${CDN_VOLUME_NAME}:/opt/old" \
-    -v "$(pwd)/../server-files/cdn:/opt/new:ro" \
-    ubuntu \
-    bash -c "set -x; rm -rf /opt/old/asserts ; cp -v -f -r /opt/new/assets /opt/old/"
+tar cvf - --strip-components 3 ../server-files/cdn/assets |
+    docker run \
+        -i \
+        --rm \
+        -v "${CDN_VOLUME_NAME}:/opt/data" \
+        ubuntu \
+        bash -c "set -x; cd /opt/data && if [ -d assets ] ; then rm -rv assets ; fi && tar xvf - || echo SOMETHING WENT WRONG >&2"
