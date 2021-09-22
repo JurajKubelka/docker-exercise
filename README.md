@@ -26,6 +26,8 @@ You can backup the `nginx-test-volume` as follows:
 docker run --rm -v nginx-test-volume:/opt/data:ro -v "$(pwd):/opt/backup" ubuntu tar cvf /opt/backup/backup.tar /opt/data
 ```
 
+The above snippet works only for local docker contexts due to `$(pwd)` usage that will point to another directory in a remote disk in case of remote contexts. The [docker/backup-volumes.sh](docker/backup-volumes.sh) provides solution that backups locally in any context.
+
 ### Restore Volume 
 
 You can restore the `nginx-test-volume` as follows:
